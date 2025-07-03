@@ -17,17 +17,13 @@ public class Conversor {
             String option = scanner.nextLine();
 
             switch (option) {
-                case "1":
-                    makeConversion();
-                    break;
-                case "2":
-                    showCurrencies();
-                    break;
-                case "3":
+                case "1" -> makeConversion();
+                case "2" -> showCurrencies();
+                case "3" -> {
                     System.out.println("Good Bye");
                     return;
-                default:
-                    System.out.println("Invalid option, Try again.");
+                }
+                default -> System.out.println("Invalid option, Try again.");
             }
         }
     }
