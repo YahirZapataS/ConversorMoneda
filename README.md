@@ -43,7 +43,7 @@ La aplicación permite convertir montos entre monedas populares y consultar los 
 ---
 
 ## 🖼️ Ejemplo de uso por consola
-![alt text](image.png)
+![Captura del conversor](/image.png)
 
 ---
 
