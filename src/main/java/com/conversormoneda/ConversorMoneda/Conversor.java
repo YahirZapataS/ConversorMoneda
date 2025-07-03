@@ -2,6 +2,7 @@ package com.conversormoneda.ConversorMoneda;
 
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.Set;
 
 public class Conversor {
 
@@ -10,7 +11,7 @@ public class Conversor {
     public static void userMenu() throws IOException, InterruptedException {
         while (true) {
             System.out.println("========== Conversor de Moneda ==========");
-            System.out.println("1. Convertir Moneda \n2. Salir");
+            System.out.println("1. Convertir Moneda \n2.Salir");
             System.out.println("Seleccione una opción: ");
             String opcion = scanner.nextLine();
 
@@ -28,11 +29,22 @@ public class Conversor {
     }
 
     private static void realizarConversion() throws IOException, InterruptedException {
+
+        Set<String> codigosValidos = ConversorApp.obtenerCodigosValidos();
+
         System.out.println("Ingrese la moneda a convertir (Ejemplo: USD, MXN): ");
         String moneda = scanner.nextLine().toUpperCase();
+        if(!codigosValidos.contains(moneda)) {
+            System.out.println("Código de moneda inválido.\n Consulta los códigos de moneda en 2.");
+            return;
+        }
 
         System.out.println("Ingrese a que moneda le gustaría convertir (Ejemplo: USD, MXN): ");
         String conversion = scanner.nextLine().toUpperCase();
+        if(!codigosValidos.contains(conversion)) {
+            System.out.println("Código de moneda inválido.\\nConsulta los códigos de moneda en 2.");
+            return;
+        }
 
         System.out.println("Ingrese el monto a convertir: ");
         double monto;
