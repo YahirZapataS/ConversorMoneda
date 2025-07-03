@@ -10,38 +10,41 @@ public class Conversor {
 
     public static void userMenu() throws IOException, InterruptedException {
         while (true) {
-            System.out.println("========== Conversor de Moneda ==========");
-            System.out.println("1. Convertir Moneda \n2.Salir");
-            System.out.println("Seleccione una opción: ");
-            String opcion = scanner.nextLine();
+            System.out.println("========== Currency Converter ==========");
+            System.out.println("1. Currency Converter\n2. Show Available Currencies\n3. Exit");
+            System.out.println("Choose an option: ");
+            String option = scanner.nextLine();
 
-            switch (opcion) {
+            switch (option) {
                 case "1":
-                    realizarConversion();
+                    makeConversion();
                     break;
                 case "2":
-                System.out.println("Adios");
-                return;
+                    showCurrencies();
+                    break;
+                case "3":
+                    System.out.println("Good Bye");
+                    return;
                 default:
-                    System.out.println("Opcion invalida.");
+                    System.out.println("Invalid option, Try again.");
             }
         }
     }
 
-    private static void realizarConversion() throws IOException, InterruptedException {
+    private static void makeConversion() throws IOException, InterruptedException {
 
-        Set<String> codigosValidos = ConversorApp.obtenerCodigosValidos();
+        Set<String> validCodes = ConversorApp.getValidCodes();
 
         System.out.println("Ingrese la moneda a convertir (Ejemplo: USD, MXN): ");
         String moneda = scanner.nextLine().toUpperCase();
-        if(!codigosValidos.contains(moneda)) {
+        if(!validCodes.contains(moneda)) {
             System.out.println("Código de moneda inválido.\n Consulta los códigos de moneda en 2.");
             return;
         }
 
         System.out.println("Ingrese a que moneda le gustaría convertir (Ejemplo: USD, MXN): ");
         String conversion = scanner.nextLine().toUpperCase();
-        if(!codigosValidos.contains(conversion)) {
+        if(!validCodes.contains(conversion)) {
             System.out.println("Código de moneda inválido.\\nConsulta los códigos de moneda en 2.");
             return;
         }
@@ -56,10 +59,15 @@ public class Conversor {
             return;
         }
 
-        double tasa = ConversorApp.obtenerTasa(moneda, conversion);
+        double tasa = ConversorApp.getRate(moneda, conversion);
         double resultado = monto * tasa;
 
         System.out.printf("Tasa actual: 1 %s = %.4f %s\n", moneda, tasa, conversion);
         System.out.printf("Resultado: %.2f %s = %.2f %s\n\n", monto, moneda, resultado, conversion);
+    }
+
+    private static void showCurrencies() throws IOException, InterruptedException {
+        Set<String> validCodes = ConversorApp.getValidCodes();
+        System.out.println("Monedas disponibles: " + String.join(", ", validCodes));
     }
 }
