@@ -1,5 +1,7 @@
 package com.conversormoneda.ConversorMoneda;
 
+import java.io.IOException;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -11,7 +13,7 @@ public class ConversorMonedaApplication {
 		
         try {
             Conversor.userMenu();
-        } catch (Exception e) {
+        } catch (IOException | InterruptedException e) {
             System.out.println("Error en ejecución: " + e.getMessage());
         }
     }
